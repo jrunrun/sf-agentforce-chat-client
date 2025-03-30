@@ -39,7 +39,7 @@ export const AnimatedChatContainer: React.FC<AnimatedChatContainerProps> = ({
               ${
                 isMobile
                   ? "w-full h-full"
-                  : "rounded-xl shadow-2xl w-full h-full"
+                  : "w-full h-full overflow-hidden"
               }
             `}
           >
