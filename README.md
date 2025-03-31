@@ -84,3 +84,76 @@ Replace `YOUR_DEPLOYED_URL` with the URL where you deployed the chat client.
 - Make sure to deploy the chat client to a secure HTTPS URL.
 - Consider implementing Content Security Policy (CSP) headers on your website to control which domains can embed the chat client.
 - The chat client should be deployed to a domain that you trust and control.
+
+# Agentforce Chat Client
+
+A modern, responsive chat client for Agentforce that can be embedded on any website.
+
+## Features
+
+- Real-time chat interface
+- Voice input support
+- Dark/Light theme support
+- Responsive design
+- Minimizable chat window
+- Error boundary handling
+
+## Development
+
+### Prerequisites
+
+- Node.js (v16 or higher)
+- pnpm (v8 or higher)
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/jrunrun/sf-agentforce-react-chat-client.git
+cd sf-agentforce-react-chat-client
+```
+
+2. Install dependencies:
+```bash
+pnpm install
+```
+
+3. Create a `.env` file based on `.env.example`:
+```bash
+cp .env.example .env
+```
+
+4. Start the development server:
+```bash
+pnpm dev
+```
+
+5. Build for production:
+```bash
+pnpm build
+```
+
+## Embedding
+
+For detailed instructions on embedding the chat client on your website, see [EMBEDDING.md](EMBEDDING.md).
+
+Quick start:
+```html
+<iframe 
+  src="YOUR_DEPLOYED_URL/index.html" 
+  style="position: fixed; bottom: 20px; right: 20px; width: 400px; height: 600px; border: none; z-index: 999999;"
+  allow="microphone"
+></iframe>
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.

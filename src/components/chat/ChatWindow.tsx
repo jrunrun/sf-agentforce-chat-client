@@ -81,7 +81,7 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({
   return (
     <>
       {windowState === "MINIMIZED" && (
-        <div className="fixed right-4 bottom-4 z-50">
+        <div className="fixed right-4 bottom-4 z-[999999]">
           <ChatMinimized onMaximize={handleMaximize} />
         </div>
       )}
@@ -89,34 +89,36 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({
         isOpen={windowState === "MAXIMIZED"}
         isMobile={isMobile}
       >
-        <ChatHeader
-          agentName={currentAgent}
-          agentRole={agentRole}
-          onMinimize={handleMinimize}
-          onClose={handleClose}
-          isConnected={isConnected}
-          onStartNewChat={startNewChat}
-        />
+        <div className="flex flex-col h-full rounded-2xl shadow-2xl overflow-hidden">
+          <ChatHeader
+            agentName={currentAgent}
+            agentRole={agentRole}
+            onMinimize={handleMinimize}
+            onClose={handleClose}
+            isConnected={isConnected}
+            onStartNewChat={startNewChat}
+          />
 
-        <ChatMessageList
-          messages={messages}
-          isLoading={isLoading || isTyping}
-          error={!!error}
-          messagesEndRef={messagesEndRef}
-        />
+          <ChatMessageList
+            messages={messages}
+            isLoading={isLoading || isTyping}
+            error={!!error}
+            messagesEndRef={messagesEndRef}
+          />
 
-        <ChatInput
-          value={inputValue}
-          onChange={setInputValue}
-          onSend={handleSend}
-          onKeyPress={(e) => {
-            if (e.key === "Enter" && !e.shiftKey) {
-              e.preventDefault();
-              handleSend();
-            }
-          }}
-          isEnabled={isConnected}
-        />
+          <ChatInput
+            value={inputValue}
+            onChange={setInputValue}
+            onSend={handleSend}
+            onKeyPress={(e) => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                handleSend();
+              }
+            }}
+            isEnabled={isConnected}
+          />
+        </div>
       </AnimatedChatContainer>
     </>
   );
