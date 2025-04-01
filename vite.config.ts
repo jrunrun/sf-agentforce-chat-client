@@ -31,7 +31,11 @@ export default defineConfig({
   },
   preview: {
     port: 4174,
-    host: '0.0.0.0'
+    host: '0.0.0.0',
+    allowedHosts: [
+      'sf-agentforce-chat-client-production.up.railway.app',
+      '.railway.app'
+    ]
   }
 })
 
