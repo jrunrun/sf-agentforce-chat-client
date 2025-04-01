@@ -22,7 +22,16 @@ export default defineConfig({
   plugins: [react()],
   server: {
     host: '0.0.0.0',
-    port: process.env.PORT ? parseInt(process.env.PORT) : 5173
+    port: process.env.PORT ? parseInt(process.env.PORT) : 5173,
+    open: false,
+    strictPort: true,
+    headers: {
+      'Access-Control-Allow-Origin': '*'
+    }
+  },
+  preview: {
+    port: 4174,
+    host: '0.0.0.0'
   }
 })
 

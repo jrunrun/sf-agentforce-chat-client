@@ -1,6 +1,7 @@
 // HTTPS CONFIG
 
 import https from 'https';
+import http from 'http';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -8,12 +9,24 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const options = {
-  key: fs.readFileSync(path.join(__dirname, 'localhost+2-key.pem')),
-  cert: fs.readFileSync(path.join(__dirname, 'localhost+2.pem'))
-};
+const isProduction = process.env.NODE_ENV === 'production';
 
-const server = https.createServer(options, function (req, res) {
+let server;
+if (isProduction) {
+  server = http.createServer(function (req, res) {
+    handleRequest(req, res);
+  });
+} else {
+  const options = {
+    key: fs.readFileSync(path.join(__dirname, 'localhost+2-key.pem')),
+    cert: fs.readFileSync(path.join(__dirname, 'localhost+2.pem'))
+  };
+  server = https.createServer(options, function (req, res) {
+    handleRequest(req, res);
+  });
+}
+
+function handleRequest(req, res) {
   let filePath = path.join(__dirname, req.url);
   if (filePath === path.join(__dirname, '/')) {
     filePath = path.join(__dirname, 'test-embed.html');
@@ -44,8 +57,10 @@ const server = https.createServer(options, function (req, res) {
       res.end(content, 'utf-8');
     }
   });
-});
+}
 
-server.listen(8443, () => {
-  console.log('HTTPS Server running at https://localhost:8443/');
+const port = process.env.PORT || 8443;
+
+server.listen(port, () => {
+  console.log(`${isProduction ? 'HTTP' : 'HTTPS'} Server running at ${isProduction ? 'http' : 'https'}://localhost:${port}/`);
 }); 
