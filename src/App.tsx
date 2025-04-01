@@ -6,10 +6,6 @@ import {
 } from "./components/chat";
 import ThemeProvider from "./contexts/ThemeContext";
 
-const HealthCheck: React.FC = () => {
-  return <div>OK</div>;
-};
-
 const AppContent: React.FC = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
 
@@ -30,11 +26,6 @@ const AppContent: React.FC = () => {
 };
 
 const App: React.FC = () => {
-  // If the path is exactly '/', render the health check
-  if (window.location.pathname === '/') {
-    return <HealthCheck />;
-  }
-
   return (
     <ThemeProvider>
       <AppContent />
